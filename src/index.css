@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-display: 'Space Grotesk', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #08110b;
+    color: #e6f0e9;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1a10;
+}
+::-webkit-scrollbar-thumb {
+  background: #1b3823;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #255233;
+}
+
+/* Leaflet dark styling */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #0a140d !important;
+  font-family: inherit;
+}
+
+.leaflet-tile {
+  filter: brightness(0.7) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+.leaflet-bar a {
+  background-color: #122416 !important;
+  color: #a7f3d0 !important;
+  border-bottom: 1px solid #1f3d25 !important;
+}
+.leaflet-bar a:hover {
+  background-color: #1b3823 !important;
+}
+
+/* Audio visualizer bar animations */
+@keyframes soundwave {
+  0%, 100% { height: 6px; }
+  50% { height: 28px; }
+}
+
+.animate-soundwave-1 {
+  animation: soundwave 0.8s ease-in-out infinite;
+}
+.animate-soundwave-2 {
+  animation: soundwave 1.1s ease-in-out 0.2s infinite;
+}
+.animate-soundwave-3 {
+  animation: soundwave 0.7s ease-in-out 0.4s infinite;
+}
+.animate-soundwave-4 {
+  animation: soundwave 1.3s ease-in-out 0.1s infinite;
+}
+.animate-soundwave-5 {
+  animation: soundwave 0.9s ease-in-out 0.3s infinite;
+}
+
+@keyframes guide-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.guide-avatar {
+  animation: guide-float 4s ease-in-out infinite;
+}
+
+.guide-robot {
+  position: relative;
+}
+
+.guide-robot__body {
+  position: relative;
+  z-index: 1;
+}
+
+.guide-robot__arm,
+.guide-robot__leg {
+  position: absolute;
+  display: block;
+  background: #a7f3d0;
+  border: 1px solid #34d399;
+  border-radius: 999px;
+  transform-origin: top center;
+}
+
+.guide-robot__arm {
+  top: 48%;
+  width: 4px;
+  height: 10px;
+}
+
+.guide-robot__arm--left {
+  left: 3px;
+  transform: rotate(28deg);
+}
+
+.guide-robot__arm--right {
+  right: 3px;
+  transform: rotate(-28deg);
+}
+
+.guide-robot__leg {
+  bottom: -3px;
+  z-index: 0;
+  width: 4px;
+  height: 6px;
+  background: #6ee7b7;
+}
+
+.guide-robot__leg--left {
+  left: 13px;
+}
+
+.guide-robot__leg--right {
+  right: 13px;
+}
+
+.guide-robot--walking .guide-robot__leg--left,
+.guide-robot--walking .guide-robot__leg--right {
+  animation: guide-walk 0.32s ease-in-out infinite alternate;
+}
+
+.guide-robot--walking .guide-robot__leg--right {
+  animation-delay: 0.16s;
+}
+
+.guide-robot--walking .guide-robot__body {
+  animation: guide-walk-bob 0.32s ease-in-out infinite alternate;
+}
+
+.guide-robot--pointing .guide-robot__arm--right {
+  height: 14px;
+  transform: rotate(-72deg) translateY(-3px);
+}
+
+.guide-robot--pointing .guide-robot__arm--left {
+  transform: rotate(34deg);
+}
+
+.guide-robot--talking .guide-robot__body {
+  animation: guide-talk 0.24s ease-in-out infinite alternate;
+}
+
+.guide-robot--talking .guide-robot__arm--right {
+  animation: guide-talk-wave 0.45s ease-in-out infinite alternate;
+}
+
+.guide-robot--idle .guide-robot__arm--right {
+  animation: guide-wave 4s ease-in-out 1s infinite;
+}
+
+.guide-launcher-robot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: guide-float 3s ease-in-out infinite;
+}
+
+@keyframes guide-wave {
+  0%, 75%, 100% { transform: rotate(-28deg); }
+  82%, 92% { transform: rotate(-78deg); }
+  87% { transform: rotate(-58deg); }
+}
+
+@keyframes guide-talk-wave {
+  from { transform: rotate(-28deg); }
+  to { transform: rotate(-68deg); }
+}
+
+@keyframes guide-talk {
+  from { transform: translateY(0) scaleY(1); }
+  to { transform: translateY(-1px) scaleY(1.04); }
+}
+
+@keyframes guide-walk {
+  from { transform: rotate(-26deg); }
+  to { transform: rotate(26deg); }
+}
+
+@keyframes guide-walk-bob {
+  from { transform: translateY(1px); }
+  to { transform: translateY(-2px); }
+}
+
+.guide-panel button:focus-visible,
+.guide-panel input:focus-visible,
+.guide-tour-card button:focus-visible {
+  outline: 2px solid #6ee7b7;
+  outline-offset: 3px;
+}
+
+[data-guide-active="true"],
+[data-guide-highlight="true"] {
+  position: relative;
+  z-index: 51;
+  outline: 2px solid #6ee7b7;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px rgb(16 185 129 / 15%), 0 0 24px rgb(16 185 129 / 30%);
+  border-radius: 0.75rem;
+  scroll-margin: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-launcher,
+  .guide-avatar,
+  .guide-launcher-robot,
+  .guide-robot__body,
+  .guide-robot__arm,
+  .guide-robot__leg {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .guide-launcher [class*="animate-pulse"] {
+    animation: none !important;
+  }
+
+  .guide-tour-card {
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .guide-tour-card {
+    max-height: min(45vh, 300px);
+    overflow-y: auto;
+  }
+}

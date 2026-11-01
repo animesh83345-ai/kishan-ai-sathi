@@ -1,0 +1,6 @@
+{
+  "name": "KrishiSaathi AI",
+  "description": "KrishiSaathi AI is a smart agriculture companion that combines NASA climate intelligence, crop risk analysis, and AI-powered voice guidance for resilient farming.",
+  "requestFramePermissions": ["geolocation", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
